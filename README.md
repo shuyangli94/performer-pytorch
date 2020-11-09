@@ -18,11 +18,12 @@ Performer Language Model
 
 ```python
 import torch
+import torch.nn as nn
 from performer_pytorch import PerformerLM
 
 model = PerformerLM(
-    num_tokens = 20000,
-    max_seq_len = 2048,             # max sequence length
+    num_tokens = 512,
+    max_seq_len = 20000,             # max sequence length
     dim = 512,                      # dimension
     depth = 12,                     # layers
     heads = 8,                      # heads
@@ -34,7 +35,6 @@ model = PerformerLM(
     ff_chunks = 10,                 # chunk feedforward layer, from Reformer paper
     use_scalenorm = False,          # use scale norm, from 'Transformers without Tears' paper
     use_rezero = False,             # use rezero, from 'Rezero is all you need' paper
-    tie_embedding = False,          # multiply final embeddings with token weights for logits, like gpt decoder
     ff_glu = True,                  # use GLU variant for feedforward
     emb_dropout = 0.1,              # embedding dropout
     ff_dropout = 0.1,               # feedforward dropout
@@ -43,7 +43,7 @@ model = PerformerLM(
     local_window_size = 256         # window size of local attention
 )
 
-x = torch.randint(0, 20000, (1, 2048))
+x = torch.randint(0, 512, (1, 20000))
 mask = torch.ones_like(x).bool()
 
 model(x, mask = mask) # (1, 2048, 20000)
