@@ -19,7 +19,7 @@ setup(
     'einops>=0.3',
     'local-attention>=1.1.1',
     'pytorch-fast-transformers>=0.3.0',
-    'torch>=1.6',
+    # 'torch>=1.6',
   ],
   classifiers=[
     'Development Status :: 4 - Beta',
